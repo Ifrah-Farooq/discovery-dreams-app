@@ -15,32 +15,32 @@
     --popover: 0 0% 100%;
     --popover-foreground: 200 25% 15%;
 
-    --primary: 152 45% 28%;
+    --primary: 210 65% 22%;
     --primary-foreground: 40 20% 98%;
 
-    --secondary: 35 60% 50%;
+    --secondary: 35 65% 50%;
     --secondary-foreground: 40 20% 98%;
 
     --muted: 40 15% 93%;
     --muted-foreground: 200 10% 45%;
 
-    --accent: 152 30% 92%;
-    --accent-foreground: 152 45% 20%;
+    --accent: 210 30% 92%;
+    --accent-foreground: 210 65% 18%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 40 15% 88%;
     --input: 40 15% 88%;
-    --ring: 152 45% 28%;
+    --ring: 210 65% 22%;
 
     --radius: 0.75rem;
 
-    --hero-overlay: linear-gradient(135deg, hsla(152, 45%, 15%, 0.7), hsla(200, 30%, 10%, 0.5));
+    --hero-overlay: linear-gradient(135deg, hsla(210, 65%, 10%, 0.65), hsla(200, 30%, 10%, 0.45));
     --glass: hsla(0, 0%, 100%, 0.15);
     --glass-border: hsla(0, 0%, 100%, 0.2);
-    --gold-gradient: linear-gradient(135deg, hsl(35, 60%, 50%), hsl(45, 70%, 55%));
-    --green-gradient: linear-gradient(135deg, hsl(152, 45%, 28%), hsl(160, 40%, 35%));
+    --gold-gradient: linear-gradient(135deg, hsl(35, 65%, 50%), hsl(45, 75%, 55%));
+    --blue-gradient: linear-gradient(135deg, hsl(210, 65%, 22%), hsl(215, 55%, 30%));
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -59,17 +59,17 @@
     --card-foreground: 40 20% 95%;
     --popover: 200 20% 12%;
     --popover-foreground: 40 20% 95%;
-    --primary: 152 45% 40%;
+    --primary: 210 65% 45%;
     --primary-foreground: 200 25% 8%;
-    --secondary: 35 60% 55%;
+    --secondary: 35 65% 55%;
     --secondary-foreground: 200 25% 8%;
     --muted: 200 15% 18%;
     --muted-foreground: 200 10% 60%;
-    --accent: 152 30% 18%;
-    --accent-foreground: 152 45% 70%;
+    --accent: 210 30% 18%;
+    --accent-foreground: 210 65% 70%;
     --border: 200 15% 22%;
     --input: 200 15% 22%;
-    --ring: 152 45% 40%;
+    --ring: 210 65% 45%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -113,10 +113,25 @@
     animation: float 6s ease-in-out infinite;
   }
   .animate-fade-up {
-    animation: fadeUp 0.8s ease-out forwards;
+    animation: fadeUp 0.8s ease-out both;
   }
   .animate-slide-in-left {
     animation: slideInLeft 0.8s ease-out forwards;
+  }
+  .animate-ken-burns {
+    animation: kenBurns 22s ease-out forwards;
+  }
+  .animate-bounce-slow {
+    animation: bounceSlow 2.2s ease-in-out infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+  .animate-slide-down {
+    animation: slideDown 0.7s ease-out both;
+  }
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out both;
   }
 }
 
@@ -126,11 +141,36 @@
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(32px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideInLeft {
   from { opacity: 0; transform: translateX(-30px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.12) translate(-2%, -1%); }
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(35, 60%, 50%, 0.4); }
+  50%       { box-shadow: 0 0 0 10px hsla(35, 60%, 50%, 0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

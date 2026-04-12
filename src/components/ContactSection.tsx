@@ -18,7 +18,7 @@ const ContactSection = () => {
     e.preventDefault();
     const subject = encodeURIComponent(`Tour Inquiry from ${formData.name}`);
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
     window.location.href = `mailto:khanmusadiq48@gmail.com?subject=${subject}&body=${body}`;
     toast({
@@ -38,7 +38,8 @@ const ContactSection = () => {
             Contact Us
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Ready to explore Kashmir? Reach out to us for customized packages and best deals.
+            Ready to explore Kashmir? Reach out to us for customized packages
+            and best deals.
           </p>
         </div>
 
@@ -49,7 +50,8 @@ const ContactSection = () => {
                 Khan Brother Tour & Travel
               </h3>
               <p className="text-muted-foreground mb-6">
-                We'd love to hear from you! Contact us for tour bookings, custom packages, or any travel inquiries.
+                We'd love to hear from you! Contact us for tour bookings, custom
+                packages, or any travel inquiries.
               </p>
             </div>
 
@@ -72,7 +74,10 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Phone</p>
-                  <a href="tel:9682553190" className="text-primary text-sm hover:underline">
+                  <a
+                    href="tel:9682553190"
+                    className="text-primary text-sm hover:underline"
+                  >
                     +91 9682553190
                   </a>
                 </div>
@@ -84,22 +89,34 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Email</p>
-                  <a href="mailto:khanmusadiq48@gmail.com" className="text-primary text-sm hover:underline block">
-                    khanmusadiq48@gmail.com
-                  </a>
-                  <a href="mailto:rd2598712@gmail.com" className="text-primary text-sm hover:underline block">
+
+                  <a
+                    href="mailto:rd2598712@gmail.com"
+                    className="text-primary text-sm hover:underline block"
+                  >
                     rd2598712@gmail.com
+                  </a>
+                  <a
+                    href="mailto:khanmusadiq48@gmail.com"
+                    className="text-primary text-sm hover:underline block"
+                  >
+                    khanmusadiq48@gmail.com
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-card border border-border/50 rounded-xl p-8 space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-card border border-border/50 rounded-xl p-8 space-y-5"
+          >
             <Input
               placeholder="Your Name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               required
               className="bg-background"
             />
@@ -107,7 +124,9 @@ const ContactSection = () => {
               type="email"
               placeholder="Email Address"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               required
               className="bg-background"
             />
@@ -115,19 +134,26 @@ const ContactSection = () => {
               type="tel"
               placeholder="Phone Number"
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
               required
               className="bg-background"
             />
             <Textarea
               placeholder="Tell us about your travel plans..."
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
               required
               rows={4}
               className="bg-background"
             />
-            <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
+            <Button
+              type="submit"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+            >
               <Send className="w-4 h-4" />
               Send Inquiry
             </Button>
