@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   type Category,
-  destinations,
+  destinations as fallbackDestinations,
   categories,
   categoryColors,
 } from "@/constants/destinations";
+import type { Dest } from "@/constants/destinations";
+import { fetchDestinations } from "@/lib/queries";
 
 /* ─── Image Carousel ──────────────────────────────────────────────── */
 const ImageCarousel = ({
@@ -92,6 +94,14 @@ const ImageCarousel = ({
 /* ─── Main Component ─────────────────────────────────────────────── */
 const DestinationsSection = () => {
   const [active, setActive] = useState<Category>("All");
+  const [destinations, setDestinations] = useState<Dest[]>(fallbackDestinations);
+
+  useEffect(() => {
+    fetchDestinations().then((data) => {
+      if (data) setDestinations(data);
+    });
+  }, []);
+
   const filtered =
     active === "All"
       ? destinations

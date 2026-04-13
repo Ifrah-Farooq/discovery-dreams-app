@@ -1,8 +1,20 @@
+import { useEffect, useState } from "react";
 import { Clock, MapPin, Star, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { packages } from "@/constants/packages";
+import { packages as fallbackPackages } from "@/constants/packages";
+import type { Package } from "@/constants/packages";
+import { fetchPackages } from "@/lib/queries";
 
-const PackagesSection = () => (
+const PackagesSection = () => {
+  const [packages, setPackages] = useState<Package[]>(fallbackPackages);
+
+  useEffect(() => {
+    fetchPackages().then((data) => {
+      if (data) setPackages(data);
+    });
+  }, []);
+
+  return (
   <section id="packages" className="py-20 md:py-28 bg-background">
     <div className="container mx-auto px-4">
       <div className="text-center mb-16">
@@ -92,6 +104,7 @@ const PackagesSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default PackagesSection;

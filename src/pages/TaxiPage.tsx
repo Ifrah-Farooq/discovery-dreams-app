@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  Car, MapPin, Users, Shield, Clock, Star, Phone,
+  Car, MapPin, Users, Clock, Star, Phone,
   CheckCircle2, ArrowRight, ChevronDown, ChevronUp,
   MessageCircle, BadgeCheck, Fuel,
 } from "lucide-react";
+import { fetchVehicles, fetchRoutes } from "@/lib/queries";
+import type { SanityVehicle, SanityRoute } from "@/lib/queries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -12,7 +14,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 /* ─── Vehicle Fleet ─────────────────────────────────────────────────── */
-const vehicles = [
+const fallbackVehicles: SanityVehicle[] = [
   {
     name: "Sedan",
     examples: "Swift Dzire / Toyota Etios",
@@ -21,7 +23,7 @@ const vehicles = [
     pricePerDay: "₹2,500",
     tag: "Economy",
     tagColor: "bg-sky-100 text-sky-700",
-    image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=85&fit=crop",
     features: ["AC", "Music System", "Comfortable Seats"],
     ideal: "Couples & Solo Trips",
   },
@@ -33,7 +35,7 @@ const vehicles = [
     pricePerDay: "₹3,000",
     tag: "Family",
     tagColor: "bg-green-100 text-green-700",
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=85&fit=crop",
     features: ["AC", "Spacious Cabin", "Good Fuel Economy"],
     ideal: "Small Family Trips",
   },
@@ -45,7 +47,7 @@ const vehicles = [
     pricePerDay: "₹4,500",
     tag: "Most Popular",
     tagColor: "bg-amber-100 text-amber-700",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85&fit=crop",
     features: ["AC", "Captain Seats", "USB Charging"],
     ideal: "Families & Comfort Trips",
   },
@@ -57,7 +59,7 @@ const vehicles = [
     pricePerDay: "₹3,300",
     tag: "Off-road Ready",
     tagColor: "bg-lime-100 text-lime-700",
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=900&q=85&fit=crop",
     features: ["AC", "4×4 Capable", "High Ground Clearance"],
     ideal: "Mountain & Ladakh Routes",
   },
@@ -69,7 +71,7 @@ const vehicles = [
     pricePerDay: "₹6,500",
     tag: "Premium",
     tagColor: "bg-violet-100 text-violet-700",
-    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=85&fit=crop",
     features: ["AC", "Luxury Interior", "Premium Sound System"],
     ideal: "VIP & Luxury Travel",
   },
@@ -81,7 +83,7 @@ const vehicles = [
     pricePerDay: "₹6,000",
     tag: "Group",
     tagColor: "bg-indigo-100 text-indigo-700",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=85&fit=crop",
     features: ["AC", "Push-back Seats", "Overhead Storage"],
     ideal: "Mid-size Groups",
   },
@@ -93,7 +95,7 @@ const vehicles = [
     pricePerDay: "₹7,500",
     tag: "Large Group",
     tagColor: "bg-rose-100 text-rose-700",
-    image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=900&q=85&fit=crop",
     features: ["AC", "Wide Reclining Seats", "Luggage Bay"],
     ideal: "Large Groups & Pilgrimages",
   },
@@ -105,14 +107,14 @@ const vehicles = [
     pricePerDay: "₹8,500",
     tag: "Large Fleet",
     tagColor: "bg-orange-100 text-orange-700",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=85&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=85&fit=crop",
     features: ["AC", "Large Cabin", "Bulk Group Discount"],
     ideal: "School, Corporate & Yatra Groups",
   },
 ];
 
 /* ─── Popular Routes ────────────────────────────────────────────────── */
-const routes = [
+const fallbackRoutes: SanityRoute[] = [
   { from: "Srinagar", to: "Gulmarg",       distance: "56 km",  duration: "1.5 hrs", price: "₹1,800",  popular: true  },
   { from: "Srinagar", to: "Pahalgam",      distance: "96 km",  duration: "2.5 hrs", price: "₹2,200",  popular: true  },
   { from: "Srinagar", to: "Sonamarg",      distance: "87 km",  duration: "2 hrs",   price: "₹2,000",  popular: true  },
@@ -196,10 +198,17 @@ const includes = [
 const TaxiPage = () => {
   const { toast } = useToast();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [vehicles, setVehicles] = useState<SanityVehicle[]>(fallbackVehicles);
+  const [routes, setRoutes] = useState<SanityRoute[]>(fallbackRoutes);
   const [form, setForm] = useState({
     name: "", phone: "", pickup: "", drop: "",
     date: "", vehicle: "", passengers: "",
   });
+
+  useEffect(() => {
+    fetchVehicles().then((data) => { if (data) setVehicles(data); });
+    fetchRoutes().then((data) => { if (data) setRoutes(data); });
+  }, []);
 
   const handleBook = (e: React.FormEvent) => {
     e.preventDefault();
@@ -306,7 +315,7 @@ const TaxiPage = () => {
               >
                 <div className="relative h-44 overflow-hidden">
                   <img
-                    src={v.image}
+                    src={v.imageUrl}
                     alt={v.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"

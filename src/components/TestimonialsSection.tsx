@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
 import { Star, Quote } from "lucide-react";
+import { fetchTestimonials } from "@/lib/queries";
+import type { SanityTestimonial } from "@/lib/queries";
 
-const testimonials = [
+/* Avatar colour cycles when not set in Sanity */
+const AVATAR_COLORS = [
+  "bg-blue-100 text-blue-700",
+  "bg-rose-100 text-rose-700",
+  "bg-emerald-100 text-emerald-700",
+  "bg-amber-100 text-amber-700",
+  "bg-violet-100 text-violet-700",
+  "bg-sky-100 text-sky-700",
+];
+
+const fallbackTestimonials: SanityTestimonial[] = [
   {
     name: "Rahul Sharma",
     location: "New Delhi",
     initials: "RS",
-    color: "bg-blue-100 text-blue-700",
     text: "Absolutely perfect trip! Every detail — from the houseboat to Gulmarg — was taken care of flawlessly. Khan Brother delivered way beyond our expectations.",
     rating: 5,
   },
@@ -13,7 +25,6 @@ const testimonials = [
     name: "Priya & Arjun Patel",
     location: "Mumbai",
     initials: "PA",
-    color: "bg-rose-100 text-rose-700",
     text: "Our honeymoon in Kashmir was a dream come true. The shikara ride at sunrise on Dal Lake was magical. Thank you for the most romantic trip of our lives!",
     rating: 5,
   },
@@ -21,7 +32,6 @@ const testimonials = [
     name: "Amit Singh",
     location: "Bangalore",
     initials: "AS",
-    color: "bg-emerald-100 text-emerald-700",
     text: "The Ladakh adventure was incredible — great local knowledge, comfortable stays, and breathtaking landscapes. Our driver Javeed was exceptional. Will 100% book again.",
     rating: 5,
   },
@@ -29,13 +39,22 @@ const testimonials = [
     name: "Sunita & Family",
     location: "Hyderabad",
     initials: "SF",
-    color: "bg-amber-100 text-amber-700",
     text: "Travelled with kids and elderly parents — Musadiq bhai made sure everyone was comfortable. The Pahalgam valley and Betaab Valley were highlights. Highly recommended!",
     rating: 5,
   },
 ];
 
-const TestimonialsSection = () => (
+const TestimonialsSection = () => {
+  const [testimonials, setTestimonials] =
+    useState<SanityTestimonial[]>(fallbackTestimonials);
+
+  useEffect(() => {
+    fetchTestimonials().then((data) => {
+      if (data) setTestimonials(data);
+    });
+  }, []);
+
+  return (
   <section className="py-16 md:py-24 bg-muted/40">
     <div className="container mx-auto px-4">
       <div className="text-center mb-14">
@@ -73,7 +92,7 @@ const TestimonialsSection = () => (
 
             {/* Reviewer */}
             <div className="flex items-center gap-3 pt-2 border-t border-border/50">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${t.color}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${t.color ?? AVATAR_COLORS[testimonials.indexOf(t) % AVATAR_COLORS.length]}`}>
                 {t.initials}
               </div>
               <div>
@@ -86,6 +105,7 @@ const TestimonialsSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default TestimonialsSection;
