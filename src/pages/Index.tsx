@@ -84,7 +84,7 @@ const featuredPackages = [
     priceNote: "per person",
     rating: 4.9,
     reviews: 120,
-    includes: ["Hotel Stay", "Sightseeing", "Meals", "Transport"],
+    includes: ["Hotel Stay", "Meals", "Transport"],
   },
   {
     slug: "honeymoon-special",
@@ -291,10 +291,6 @@ const Index = () => (
                 <span className="absolute top-3 left-3 bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">
                   {pkg.badge}
                 </span>
-                <div className="absolute bottom-3 right-3 bg-black/55 backdrop-blur-sm text-white px-3 py-1.5 rounded-xl text-right">
-                  <p className="text-lg font-bold leading-none">{pkg.price}</p>
-                  <p className="text-[10px] text-white/70">{pkg.priceNote}</p>
-                </div>
               </div>
 
               <div className="p-5 flex flex-col flex-1">
@@ -302,15 +298,6 @@ const Index = () => (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
                   {pkg.route}
-                </div>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> {pkg.duration}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 fill-secondary text-secondary" />
-                    {pkg.rating} ({pkg.reviews})
-                  </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-5 flex-1">
                   {pkg.includes.map((item) => (
@@ -326,7 +313,7 @@ const Index = () => (
                     </Button>
                   </a>
                   <a
-                    href={`https://wa.me/919682553190?text=${encodeURIComponent(`Hi, I'm interested in *${pkg.title}* (${pkg.duration}) — ${pkg.price}. Please share availability.`)}`}
+                    href={`https://wa.me/919682553190?text=${encodeURIComponent(`Hi, I'm interested in *${pkg.title}* (${pkg.duration}). Please share availability.`)}`}
                     target="_blank" rel="noopener noreferrer"
                     className="flex-1"
                   >

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PackagesSection from "@/components/PackagesSection";
 import PageBanner from "@/components/PageBanner";
-import gulmargImg from "@/assets/gulmarg.jpg";
+import gulmargImg from "@/assets/hero-kashmir.jpg";
 
 const PackagesPage = () => (
   <div className="min-h-screen">

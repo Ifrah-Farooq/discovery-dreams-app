@@ -1,14 +1,23 @@
-import gulmargImg    from "@/assets/gulmarg.jpg";
-import houseboatImg  from "@/assets/houseboat.jpg";
-import ladakhImg     from "@/assets/ladakh.jpg";
-import pahalgamImg   from "@/assets/pahalgam.jpg";
-import sonamargImg   from "@/assets/sonamarg.jpg";
+import gulmargImg from "@/assets/gulmarg.jpg";
+import houseboatImg from "@/assets/houseboat.jpg";
+import ladakhImg from "@/assets/ladakh.jpg";
+import pahalgamImg from "@/assets/pahalgam.jpg";
+import sonamargImg from "@/assets/sonamarg.jpg";
 
 export interface DayItinerary {
   day: number;
   title: string;
   activities: string[];
   overnight: string;
+}
+
+export interface ServiceTier {
+  stars: 2 | 3 | 4 | 5;
+  label: string;
+  hotel: string;
+  meals: string;
+  restaurant: string;
+  transport: string;
 }
 
 export interface Package {
@@ -18,23 +27,51 @@ export interface Package {
   image: string;
   badge: string;
   route: string;
-  duration: string;
-  nights: number;
-  days: number;
-  price: string;
-  priceNote: string;
-  groupSize: string;
-  rating: number;
-  reviews: number;
   overview: string;
   highlights: string[];
   itinerary: DayItinerary[];
   inclusions: string[];
   exclusions: string[];
-  pricing: { label: string; price: string }[];
   tips: string[];
   bestTime: string;
+  serviceTiers: ServiceTier[];
 }
+
+/** Shared service tier definitions — applied to all packages */
+export const defaultServiceTiers: ServiceTier[] = [
+  {
+    stars: 2,
+    label: "Economy",
+    hotel: "Budget guesthouses & basic shared rooms",
+    meals: "Breakfast only (simple local fare)",
+    restaurant: "Local dhabas & budget eateries",
+    transport: "Shared cab / budget vehicle",
+  },
+  {
+    stars: 3,
+    label: "Standard",
+    hotel: "3-star hotel or standard heritage houseboat",
+    meals: "Daily breakfast & dinner included",
+    restaurant: "Good local Kashmiri restaurants",
+    transport: "Private cab (Innova / Ertiga)",
+  },
+  {
+    stars: 4,
+    label: "Deluxe",
+    hotel: "4-star hotel or premium houseboat",
+    meals: "All meals + welcome Wazwan dinner",
+    restaurant: "Curated multi-cuisine restaurants",
+    transport: "Premium SUV (Fortuner / Scorpio N)",
+  },
+  {
+    stars: 5,
+    label: "Luxury",
+    hotel: "5-star resort or luxury houseboat suite",
+    meals: "Gourmet all-inclusive dining",
+    restaurant: "Fine-dining & private chef arrangements",
+    transport: "Luxury vehicle + dedicated personal guide",
+  },
+];
 
 export const packages: Package[] = [
   /* ── 1. Kashmir Paradise Tour ─────────────────────────────────── */
@@ -45,14 +82,6 @@ export const packages: Package[] = [
     image: gulmargImg,
     badge: "Best Seller",
     route: "Srinagar · Gulmarg · Pahalgam",
-    duration: "5 Days / 4 Nights",
-    nights: 4,
-    days: 5,
-    price: "₹14,500",
-    priceNote: "per person (twin sharing)",
-    groupSize: "2–10 People",
-    rating: 4.9,
-    reviews: 120,
     overview:
       "The Kashmir Paradise Tour is our most popular package — a carefully crafted 5-day journey through the crown jewels of the Kashmir Valley. From shikara rides on the iconic Dal Lake to the snow-capped slopes of Gulmarg and the lush valleys of Pahalgam, this tour gives you the complete Kashmir experience at the best value.",
     highlights: [
@@ -128,13 +157,11 @@ export const packages: Package[] = [
       },
     ],
     inclusions: [
-      "4 nights accommodation (houseboat 2N + hotel 2N)",
-      "Daily breakfast & dinner (Wazwan welcome dinner included)",
-      "All sightseeing by private AC cab",
-      "Airport / station pickup and drop",
-      "Experienced local guide for Gulmarg and Pahalgam",
-      "All toll, parking & driver charges",
-      "24/7 on-trip support from Khan Brother team",
+      "Daily breakfast & dinner",
+      "Airport pickup & drop",
+      "Local guide (Gulmarg & Pahalgam)",
+      "All tolls, parking & driver charges",
+      "24/7 trip support",
     ],
     exclusions: [
       "Gondola / cable car tickets at Gulmarg (Phase 1: ~₹800, Phase 2: ~₹1,000)",
@@ -144,19 +171,15 @@ export const packages: Package[] = [
       "Lunch (you can eat at local restaurants at your own cost)",
       "Travel insurance",
     ],
-    pricing: [
-      { label: "2 Persons",  price: "₹14,500 / person" },
-      { label: "4 Persons",  price: "₹13,000 / person" },
-      { label: "6 Persons",  price: "₹12,000 / person" },
-      { label: "8+ Persons", price: "₹11,000 / person" },
-    ],
     tips: [
       "Carry light woolens even in summer — evenings can be chilly at 5,000+ ft",
       "Book Gondola tickets online in advance during peak season (May–June)",
       "Try Kahwa (Kashmiri saffron tea) every morning — it's on us!",
       "Carry some cash — card machines are unreliable in Pahalgam",
     ],
-    bestTime: "March to November. Peak beauty in April (tulips), May–June (green meadows), and October (autumn chinars). Gulmarg skiing best in December–February.",
+    bestTime:
+      "March to November. Peak beauty in April (tulips), May–June (green meadows), and October (autumn chinars). Gulmarg skiing best in December–February.",
+    serviceTiers: defaultServiceTiers,
   },
 
   /* ── 2. Honeymoon Special ─────────────────────────────────────── */
@@ -167,14 +190,6 @@ export const packages: Package[] = [
     image: houseboatImg,
     badge: "Most Romantic",
     route: "Srinagar · Houseboat · Gulmarg · Pahalgam",
-    duration: "6 Days / 5 Nights",
-    nights: 5,
-    days: 6,
-    price: "₹21,000",
-    priceNote: "per couple (all-inclusive)",
-    groupSize: "Couples Only",
-    rating: 5.0,
-    reviews: 85,
     overview:
       "Crafted exclusively for newlyweds, our Honeymoon Special blends romantic houseboat stays, candlelit dinners, serene shikara rides, and snow-dusted mountain escapes into a 6-day fairy tale. Kashmir is called Paradise on Earth — and this package shows you exactly why.",
     highlights: [
@@ -258,14 +273,12 @@ export const packages: Package[] = [
       },
     ],
     inclusions: [
-      "5 nights accommodation (premium houseboat 3N + riverside hotel 2N)",
-      "Daily breakfast and dinner",
+      "Daily breakfast & dinner",
       "Candlelit dinner on Day 1",
-      "Rose-petal room decoration on arrival",
-      "All sightseeing in private AC cab",
-      "Airport / station pickup and drop",
-      "All toll, parking & driver charges",
-      "24/7 couple support from Khan Brother team",
+      "Rose-petal room decoration",
+      "Airport pickup & drop",
+      "All tolls, parking & driver charges",
+      "24/7 trip support",
     ],
     exclusions: [
       "Gondola tickets at Gulmarg",
@@ -275,18 +288,15 @@ export const packages: Package[] = [
       "Pony rides and adventure activities",
       "Travel insurance",
     ],
-    pricing: [
-      { label: "Per Couple (Standard)", price: "₹21,000 / couple" },
-      { label: "Per Couple (Deluxe Houseboat)", price: "₹26,000 / couple" },
-      { label: "Per Couple (Premium Suite)", price: "₹32,000 / couple" },
-    ],
     tips: [
       "Book December–February for a snow honeymoon; April–May for flowers",
       "Mention any special occasions (anniversary, birthday) while booking — we arrange surprises",
       "Carry your own music playlist for the shikara ride — it makes it magical",
       "Pahalgam is cooler than Srinagar — pack an extra layer",
     ],
-    bestTime: "April–May for blooming tulips and green meadows. December–February for a dreamy snow honeymoon at Gulmarg.",
+    bestTime:
+      "April–May for blooming tulips and green meadows. December–February for a dreamy snow honeymoon at Gulmarg.",
+    serviceTiers: defaultServiceTiers,
   },
 
   /* ── 3. Adventure Ladakh ──────────────────────────────────────── */
@@ -297,14 +307,6 @@ export const packages: Package[] = [
     image: ladakhImg,
     badge: "Top Rated",
     route: "Leh · Nubra Valley · Pangong Tso",
-    duration: "7 Days / 6 Nights",
-    nights: 6,
-    days: 7,
-    price: "₹28,500",
-    priceNote: "per person (twin sharing)",
-    groupSize: "2–8 People",
-    rating: 4.8,
-    reviews: 95,
     overview:
       "Ladakh is not just a destination — it's an experience that rewires you. This 7-day adventure takes you from the ancient monastery lanes of Leh to the sand dunes of Nubra Valley and the breathtaking turquoise shores of Pangong Lake at 14,270 ft. A journey for those who seek the extraordinary.",
     highlights: [
@@ -402,14 +404,12 @@ export const packages: Package[] = [
       },
     ],
     inclusions: [
-      "6 nights accommodation (hotel 4N + lakeside camp 1N + Nubra camp 1N)",
-      "Daily breakfast and dinner",
-      "All sightseeing by private AC SUV / Innova",
-      "Leh Airport pickup and drop",
-      "Inner Line Permits for Nubra and Pangong (included)",
-      "Experienced local Ladakhi driver-guide",
-      "All toll, parking & driver charges",
-      "24/7 on-trip support",
+      "Daily breakfast & dinner",
+      "Leh airport pickup & drop",
+      "Inner Line Permits (Nubra & Pangong)",
+      "Local Ladakhi driver-guide",
+      "All tolls, parking & driver charges",
+      "24/7 trip support",
     ],
     exclusions: [
       "Flights to/from Leh",
@@ -420,12 +420,6 @@ export const packages: Package[] = [
       "Travel insurance (strongly recommended for Ladakh)",
       "Oxygen cylinder (available on request at extra cost)",
     ],
-    pricing: [
-      { label: "2 Persons",  price: "₹28,500 / person" },
-      { label: "4 Persons",  price: "₹26,000 / person" },
-      { label: "6 Persons",  price: "₹24,000 / person" },
-      { label: "Bike Package (Royal Enfield)", price: "₹35,000 / person" },
-    ],
     tips: [
       "Fly into Leh — do NOT drive from Manali without prior acclimatisation",
       "Drink 3–4 litres of water per day. Avoid alcohol for the first 2 days",
@@ -433,7 +427,9 @@ export const packages: Package[] = [
       "Carry warm layers even in June — Pangong nights drop to near-freezing",
       "Ladakh flights book up fast in peak season — book 4–6 weeks ahead",
     ],
-    bestTime: "June to September is ideal. Roads and passes open by mid-May. July–August is peak season. September offers clear skies and fewer crowds.",
+    bestTime:
+      "June to September is ideal. Roads and passes open by mid-May. July–August is peak season. September offers clear skies and fewer crowds.",
+    serviceTiers: defaultServiceTiers,
   },
 
   /* ── 4. Pahalgam Getaway ──────────────────────────────────────── */
@@ -444,14 +440,6 @@ export const packages: Package[] = [
     image: pahalgamImg,
     badge: "Great Value",
     route: "Srinagar · Pahalgam",
-    duration: "4 Days / 3 Nights",
-    nights: 3,
-    days: 4,
-    price: "₹11,800",
-    priceNote: "per person (twin sharing)",
-    groupSize: "2–12 People",
-    rating: 4.7,
-    reviews: 60,
     overview:
       "Perfect for those short on time but not on wanderlust, the Pahalgam Getaway packs the most scenic valley in Kashmir into a relaxed 4-day trip. Betaab Valley, Aru Valley, Chandanwari snowfields, and the roaring Lidder River — this is Kashmir as you've seen it in Bollywood, and it's even better in real life.",
     highlights: [
@@ -512,12 +500,10 @@ export const packages: Package[] = [
       },
     ],
     inclusions: [
-      "3 nights accommodation (Pahalgam hotel 2N + Srinagar hotel 1N)",
-      "Daily breakfast and dinner",
-      "All sightseeing in private AC cab",
-      "Airport pickup and drop",
-      "All toll, parking & driver charges",
-      "24/7 support",
+      "Daily breakfast & dinner",
+      "Airport pickup & drop",
+      "All tolls, parking & driver charges",
+      "24/7 trip support",
     ],
     exclusions: [
       "Pony rides at Baisaran (~₹400–600)",
@@ -527,19 +513,15 @@ export const packages: Package[] = [
       "Adventure activities",
       "Travel insurance",
     ],
-    pricing: [
-      { label: "2 Persons",  price: "₹11,800 / person" },
-      { label: "4 Persons",  price: "₹10,500 / person" },
-      { label: "6 Persons",  price: "₹9,800 / person" },
-      { label: "8+ Persons", price: "₹9,000 / person" },
-    ],
     tips: [
       "This is the base camp for Amarnath Yatra — book early if travelling in June–July",
       "Pahalgam is cooler than Srinagar by 4–5°C — carry a jacket even in summer",
       "Chandanwari snow is best April–July; by August the snow reduces",
       "Try trout fish at a local Pahalgam restaurant — it's freshly caught from Lidder",
     ],
-    bestTime: "April to October. Spring (April–May) and Autumn (September–October) offer the best weather. Summer (June–July) is the busiest.",
+    bestTime:
+      "April to October. Spring (April–May) and Autumn (September–October) offer the best weather. Summer (June–July) is the busiest.",
+    serviceTiers: defaultServiceTiers,
   },
 
   /* ── 5. Sonamarg Glacier Trek ─────────────────────────────────── */
@@ -550,14 +532,6 @@ export const packages: Package[] = [
     image: sonamargImg,
     badge: "Adventure",
     route: "Srinagar · Sonamarg",
-    duration: "3 Days / 2 Nights",
-    nights: 2,
-    days: 3,
-    price: "₹9,500",
-    priceNote: "per person (twin sharing)",
-    groupSize: "2–8 People",
-    rating: 4.8,
-    reviews: 45,
     overview:
       "Sonamarg — the Meadow of Gold — sits at 8,957 ft on the banks of the Sindh River, framed by glaciers and snow-capped peaks. This compact 3-day trek takes you to the stunning Thajiwas Glacier and the turquoise Vishansar trail. No prior trekking experience needed — just a sense of adventure.",
     highlights: [
@@ -609,12 +583,11 @@ export const packages: Package[] = [
       },
     ],
     inclusions: [
-      "2 nights accommodation in Sonamarg (hotel or tent camp)",
-      "Daily breakfast and dinner",
-      "Srinagar–Sonamarg–Srinagar transfer by private cab",
-      "Airport pickup and drop",
-      "Local trek guide for Thajiwas Glacier",
-      "All toll, parking & driver charges",
+      "Daily breakfast & dinner",
+      "Srinagar–Sonamarg–Srinagar transfer",
+      "Airport pickup & drop",
+      "Local glacier trek guide",
+      "All tolls, parking & driver charges",
     ],
     exclusions: [
       "Pony hire at Thajiwas (~₹400–600)",
@@ -624,19 +597,15 @@ export const packages: Package[] = [
       "Personal expenses & shopping",
       "Travel insurance",
     ],
-    pricing: [
-      { label: "2 Persons",  price: "₹9,500 / person" },
-      { label: "4 Persons",  price: "₹8,500 / person" },
-      { label: "6 Persons",  price: "₹7,800 / person" },
-      { label: "Camp Stay Upgrade", price: "₹500 extra / person" },
-    ],
     tips: [
       "Wear sturdy shoes — the glacier surface is uneven",
       "Carry sunscreen SPF 50+ and sunglasses — snow glare is intense",
       "Best to start the glacier trek before 9 AM — afternoon clouds roll in",
       "The road to Sonamarg passes through Zoji La — can close unexpectedly in bad weather",
     ],
-    bestTime: "May to October. Snow on Thajiwas Glacier is best May–July. August–September offers green meadows with less snow but beautiful weather.",
+    bestTime:
+      "May to October. Snow on Thajiwas Glacier is best May–July. August–September offers green meadows with less snow but beautiful weather.",
+    serviceTiers: defaultServiceTiers,
   },
 ];
 
