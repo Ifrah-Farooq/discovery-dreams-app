@@ -30,7 +30,7 @@ const AboutSection = () => {
               we craft every journey with care and passion. Whether it's a honeymoon,
               family vacation, or solo adventure — we've got you covered.
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <div className="text-center">
                 <p className="text-3xl font-serif font-bold text-primary">5000+</p>
                 <p className="text-sm text-muted-foreground">Happy Guests</p>
@@ -48,7 +48,7 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((f) => (
               <div
                 key={f.title}

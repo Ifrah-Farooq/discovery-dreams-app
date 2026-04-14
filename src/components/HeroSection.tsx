@@ -1,4 +1,4 @@
-import { MapPin, Star, Users, Car, ChevronDown } from "lucide-react";
+import { MapPin, Star, Users, Car, ChevronDown, Award } from "lucide-react";
 import { LogoMark } from "@/components/Navbar";
 import { useEffect, useState } from "react";
 
@@ -56,7 +56,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
 
       {/* ── Content ─────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full container mx-auto px-4 pt-24 pb-10 flex flex-col items-center text-center">
+      <div className="relative z-10 w-full container mx-auto px-4 pt-20 md:pt-24 pb-10 flex flex-col items-center text-center">
         {/* Logo mark */}
         <div
           className="animate-fade-in mb-4"
@@ -78,12 +78,23 @@ const HeroSection = () => {
 
         {/* Trust badge */}
         <div
-          className="animate-fade-up mb-5"
+          className="animate-fade-up mb-3"
           style={{ animationDelay: "0.25s" }}
         >
           <span className="inline-flex items-center gap-2 bg-black/40 border border-white/30 text-white px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-md shadow-lg">
             <Star className="w-3.5 h-3.5 fill-secondary text-secondary" />
             Kashmir's Most Trusted Travel Agency
+          </span>
+        </div>
+
+        {/* J&K Tourism Recognition badge */}
+        <div
+          className="animate-fade-up mb-4"
+          style={{ animationDelay: "0.35s" }}
+        >
+          <span className="inline-flex items-center gap-2 bg-secondary/90 border border-secondary text-secondary-foreground px-5 py-2 rounded-full text-sm font-bold backdrop-blur-md shadow-lg">
+            <Award className="w-4 h-4" />
+            Recognised by J&K Tourism, Govt. of India · 2018
           </span>
         </div>
 
@@ -114,7 +125,7 @@ const HeroSection = () => {
 
         {/* ── Stats bar ─────────────────────────────────────────── */}
         <div
-          className="animate-fade-up mt-10 flex flex-wrap justify-center gap-4 md:gap-8"
+          className="animate-fade-up mt-8 grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 md:gap-6 w-full sm:w-auto"
           style={{ animationDelay: "0.9s" }}
         >
           {stats.map((s) => (

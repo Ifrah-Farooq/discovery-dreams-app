@@ -5,7 +5,7 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Packages", href: "/packages" },
   { label: "Destinations", href: "/destinations" },
-  { label: "Taxi Service", href: "/taxi" },
+  { label: "Taxi Service", href: "/taxi-service" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

@@ -4,37 +4,55 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import {
-  MapPin, Car, Package, Phone, Shield, Clock, Award, Star,
-  Users, ChevronRight, HeartHandshake, Compass, CheckCircle2,
+  MapPin,
+  Car,
+  Package,
+  Phone,
+  Shield,
+  Clock,
+  Award,
+  Star,
+  Users,
+  ChevronRight,
+  HeartHandshake,
+  Compass,
+  CheckCircle2,
+  Bike,
+  Mountain,
+  Camera,
+  PartyPopper,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Service card images (original assets)
-import gulmargImg    from "@/assets/gulmarg.jpg";
-import ladakhImg     from "@/assets/ladakh.jpg";
-import pahalgamImg   from "@/assets/pahalgam.jpg";
-import houseboatImg  from "@/assets/houseboat.jpg";
+// Service card images — each unique, no repeats
+import gulmargImg from "@/assets/gulmarg.jpg"; // Tour Packages
+import ladakhImg from "@/assets/ladakh.jpg"; // Adventure Ladakh package
+import taxiImg from "@/assets/Toyato-crista 6seater.jpeg"; // Taxi Service
+import pahalgamImg from "@/assets/pahalgam.jpg"; // Destinations
+import houseboatImg from "@/assets/houseboat.jpg"; // Houseboat Stays
+import rentalCarImg from "@/assets/commercial Toyato fortuner.jpeg"; // Rental Bikes & Cars
+import sonamargMdwImg from "@/assets/sonamarg-meadow.jpg"; // Trekking & Adventure
+import pangongImg from "@/assets/pangong-lake.jpg"; // Cinematography
+import shalimarbImg from "@/assets/shalimar-bagh.jpg"; // Events & Celebrations
 
-// Popular destination circle images (high-quality user assets)
-import gulmargResortImg  from "@/assets/gulmarg-resort.jpg";
-import sonamargMdwImg    from "@/assets/sonamarg-meadow.jpg";
-import dalHouseboatImg   from "@/assets/dal-houseboat.jpg";
-import yusmargImg        from "@/assets/yusmarg-meadow.jpg";
-import srinagarImg       from "@/assets/srinagar-city.jpg";
-import nubraImg          from "@/assets/nubra-valley.jpg";
-import pangongImg        from "@/assets/pangong-lake.jpg";
+// Popular destination circle images
+import gulmargResortImg from "@/assets/gulmarg-resort.jpg";
+import nubraImg from "@/assets/nubra-valley.jpg";
+import dalHouseboatImg from "@/assets/dal-houseboat.jpg";
+import yusmargImg from "@/assets/yusmarg-meadow.jpg";
+import srinagarImg from "@/assets/srinagar-city.jpg";
 
 /* ─── Data ──────────────────────────────────────────────────────────── */
 
 const popularDestinations = [
-  { name: "Gulmarg",      image: gulmargResortImg, href: "/destinations" },
-  { name: "Pahalgam",     image: pahalgamImg,       href: "/destinations" },
-  { name: "Sonamarg",     image: sonamargMdwImg,    href: "/destinations" },
-  { name: "Dal Lake",     image: dalHouseboatImg,   href: "/destinations" },
-  { name: "Yusmarg",      image: yusmargImg,        href: "/destinations" },
-  { name: "Srinagar",     image: srinagarImg,       href: "/destinations" },
-  { name: "Nubra Valley", image: nubraImg,          href: "/destinations" },
-  { name: "Pangong Tso",  image: pangongImg,        href: "/destinations" },
+  { name: "Gulmarg", image: gulmargResortImg, href: "/destinations" },
+  { name: "Pahalgam", image: pahalgamImg, href: "/destinations" },
+  { name: "Sonamarg", image: sonamargMdwImg, href: "/destinations" },
+  { name: "Dal Lake", image: dalHouseboatImg, href: "/destinations" },
+  { name: "Yusmarg", image: yusmargImg, href: "/destinations" },
+  { name: "Srinagar", image: srinagarImg, href: "/destinations" },
+  { name: "Nubra Valley", image: nubraImg, href: "/destinations" },
+  { name: "Pangong Tso", image: pangongImg, href: "/destinations" },
 ];
 
 const services = [
@@ -50,8 +68,8 @@ const services = [
     icon: Car,
     title: "Taxi Service",
     desc: "Comfortable cabs across every route in Kashmir — Innova, Scorpio, Tempo & more.",
-    image: ladakhImg,
-    href: "/taxi",
+    image: taxiImg,
+    href: "/taxi-service",
     cta: "Book a Cab",
   },
   {
@@ -69,6 +87,38 @@ const services = [
     image: houseboatImg,
     href: "/contact",
     cta: "Enquire Now",
+  },
+  {
+    icon: Bike,
+    title: "Rental Bikes & Cars",
+    desc: "Self-drive adventure — rent a bike, car, or 4×4 SUV and explore Kashmir at your own pace.",
+    image: rentalCarImg,
+    href: "/contact",
+    cta: "Rent Now",
+  },
+  {
+    icon: Mountain,
+    title: "Trekking & Adventure",
+    desc: "Expert trekking guides, full equipment rental & all facilities for Kashmir's most iconic trails.",
+    image: sonamargMdwImg,
+    href: "/contact",
+    cta: "Plan Trek",
+  },
+  {
+    icon: Camera,
+    title: "Cinematography",
+    desc: "Professional wedding shoots, pre-wedding photography & cinematic films in the valleys of Kashmir.",
+    image: pangongImg,
+    href: "/contact",
+    cta: "Book Shoot",
+  },
+  {
+    icon: PartyPopper,
+    title: "Events & Celebrations",
+    desc: "Weddings, anniversaries & birthday parties arranged at the finest hotels and venues across Kashmir.",
+    image: shalimarbImg,
+    href: "/contact",
+    cta: "Plan Event",
   },
 ];
 
@@ -132,25 +182,41 @@ const whyChooseUs = [
   },
   {
     icon: Award,
-    title: "Best Price Guarantee",
-    desc: "Direct booking, no middlemen. Honest pricing with zero hidden charges — guaranteed.",
+    title: "J&K Tourism Recognised · 2018",
+    desc: "Officially recognised by J&K Tourism Department, Government of India since 2018 — a badge of trust and quality.",
   },
 ];
 
 const trustStats = [
   { value: "5,000+", label: "Happy Travelers" },
-  { value: "10+",    label: "Years Experience" },
-  { value: "50+",    label: "Destinations" },
-  { value: "4.9★",  label: "Average Rating"  },
+  { value: "10+", label: "Years Experience" },
+  { value: "50+", label: "Destinations" },
+  { value: "4.9★", label: "Average Rating" },
 ];
 
-const certifications = ["J&K Tourism Approved", "Verified Agency", "5★ on Google"];
+const certifications = [
+  "Recognised by J&K Tourism · 2018",
+  "Verified Agency",
+  "5★ on Google",
+];
 
 /* ─── Index Page ────────────────────────────────────────────────────── */
 const Index = () => (
   <div className="min-h-screen">
     <Navbar />
     <HeroSection />
+
+    {/* ── J&K Tourism Recognition Banner ───────────────────────────── */}
+    <div className="bg-primary text-primary-foreground py-3 px-4">
+      <div className="container mx-auto flex items-center justify-center gap-3 text-center flex-wrap">
+        <Award className="w-5 h-5 text-secondary shrink-0" />
+        <p className="font-semibold text-sm md:text-base tracking-wide">
+          Officially Recognised by J&K Tourism Department, Government of India —
+          Since 2018
+        </p>
+        <Award className="w-5 h-5 text-secondary shrink-0" />
+      </div>
+    </div>
 
     {/* ── Popular Destinations ─────────────────────────────────────── */}
     <section className="py-16 md:py-20 bg-background">
@@ -196,7 +262,10 @@ const Index = () => (
 
         <div className="mt-8 text-center md:hidden">
           <a href="/destinations">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
               View All Destinations
             </Button>
           </a>
@@ -215,11 +284,12 @@ const Index = () => (
             Our Services
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-sm">
-            Everything you need for the perfect Kashmir vacation — under one roof.
+            Everything you need for the perfect Kashmir vacation — under one
+            roof.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {services.map((s) => (
             <a
               key={s.title}
@@ -237,8 +307,12 @@ const Index = () => (
                 <div className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center mb-3">
                   <s.icon className="w-4 h-4 text-white" />
                 </div>
-                <h3 className="font-serif font-bold text-white text-lg mb-1">{s.title}</h3>
-                <p className="text-white/65 text-xs leading-relaxed mb-3 line-clamp-2">{s.desc}</p>
+                <h3 className="font-serif font-bold text-white text-lg mb-1">
+                  {s.title}
+                </h3>
+                <p className="text-white/65 text-xs leading-relaxed mb-3 line-clamp-2">
+                  {s.desc}
+                </p>
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-secondary group-hover:gap-2.5 transition-all duration-300">
                   {s.cta} →
                 </span>
@@ -261,7 +335,8 @@ const Index = () => (
               Featured Packages
             </h2>
             <p className="text-muted-foreground mt-2 text-sm max-w-md">
-              Handcrafted itineraries at honest prices — for couples, families & groups.
+              Handcrafted itineraries at honest prices — for couples, families &
+              groups.
             </p>
           </div>
           <a
@@ -294,27 +369,36 @@ const Index = () => (
               </div>
 
               <div className="p-5 flex flex-col flex-1">
-                <h3 className="font-serif font-bold text-foreground text-xl mb-1.5">{pkg.title}</h3>
+                <h3 className="font-serif font-bold text-foreground text-xl mb-1.5">
+                  {pkg.title}
+                </h3>
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
                   {pkg.route}
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-5 flex-1">
                   {pkg.includes.map((item) => (
-                    <span key={item} className="text-xs bg-accent text-accent-foreground px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <span
+                      key={item}
+                      className="text-xs bg-accent text-accent-foreground px-2.5 py-1 rounded-full flex items-center gap-1"
+                    >
                       <CheckCircle2 className="w-3 h-3" /> {item}
                     </span>
                   ))}
                 </div>
                 <div className="flex gap-3">
                   <a href={`/packages/${pkg.slug}`} className="flex-1">
-                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <Button
+                      variant="outline"
+                      className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
                       View Details
                     </Button>
                   </a>
                   <a
                     href={`https://wa.me/919682553190?text=${encodeURIComponent(`Hi, I'm interested in *${pkg.title}* (${pkg.duration}). Please share availability.`)}`}
-                    target="_blank" rel="noopener noreferrer"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex-1"
                   >
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
@@ -329,7 +413,10 @@ const Index = () => (
 
         <div className="mt-8 text-center md:hidden">
           <a href="/packages">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
               View All Packages
             </Button>
           </a>
@@ -346,11 +433,14 @@ const Index = () => (
               Why Choose Us
             </p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-5 leading-tight">
-              Kashmir Travel You Can<br />Actually Trust
+              Kashmir Travel You Can
+              <br />
+              Actually Trust
             </h2>
             <p className="text-primary-foreground/70 leading-relaxed mb-8 text-sm max-w-md">
-              Hundreds of travelers choose Khan Brother every season — not because of flashy ads,
-              but because of genuine service, local roots, and a personal touch no large agency can offer.
+              Hundreds of travelers choose Khan Brother every season — not
+              because of flashy ads, but because of genuine service, local
+              roots, and a personal touch no large agency can offer.
             </p>
             <a href="/about">
               <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 gap-2">
@@ -359,7 +449,7 @@ const Index = () => (
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {whyChooseUs.map((item) => (
               <div
                 key={item.title}
@@ -384,19 +474,26 @@ const Index = () => (
     {/* ── Trust Strip ──────────────────────────────────────────────── */}
     <section className="py-10 bg-secondary/10 border-y border-secondary/20">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 md:gap-4">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-10">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-6 md:gap-4">
+          <div className="grid grid-cols-2 sm:flex flex-wrap justify-center gap-6 md:gap-10 w-full sm:w-auto">
             {trustStats.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-2xl md:text-3xl font-serif font-bold text-primary">{s.value}</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide mt-0.5">{s.label}</p>
+                <p className="text-2xl md:text-3xl font-serif font-bold text-primary">
+                  {s.value}
+                </p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mt-0.5">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
           <div className="hidden md:block h-10 w-px bg-border" />
           <div className="flex items-center gap-2 flex-wrap justify-center">
             {certifications.map((cert) => (
-              <span key={cert} className="text-xs font-semibold bg-card border border-border px-3 py-1.5 rounded-full text-foreground/70 flex items-center gap-1.5">
+              <span
+                key={cert}
+                className="text-xs font-semibold bg-card border border-border px-3 py-1.5 rounded-full text-foreground/70 flex items-center gap-1.5"
+              >
                 <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
                 {cert}
               </span>

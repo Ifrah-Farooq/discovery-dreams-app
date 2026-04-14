@@ -358,6 +358,12 @@ const TaxiPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent" />
 
         <div className="relative container mx-auto px-4 pt-20">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-white/55 text-xs mb-4">
+            <a href="/" className="hover:text-white transition-colors">Home</a>
+            <span>›</span>
+            <span className="text-white/80 font-medium">Taxi Service</span>
+          </div>
           <p className="text-secondary font-sans text-sm uppercase tracking-[0.3em] mb-3 animate-fade-up">
             Khan Brother Tour & Travel
           </p>
@@ -458,7 +464,7 @@ const TaxiPage = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {vehicles.map((v) => (
               <div
                 key={v.name}
@@ -549,8 +555,9 @@ const TaxiPage = () => {
           </div>
 
           <div className="max-w-4xl mx-auto bg-card border border-border/50 rounded-2xl overflow-hidden shadow-sm">
+            <div className="overflow-x-auto">
             {/* Table header */}
-            <div className="grid grid-cols-5 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide px-5 py-3.5">
+            <div className="grid grid-cols-5 bg-primary text-primary-foreground text-xs font-semibold uppercase tracking-wide px-5 py-3.5 min-w-[520px]">
               <span className="col-span-2">Route</span>
               <span className="text-center">Distance</span>
               <span className="text-center">Duration</span>
@@ -560,7 +567,7 @@ const TaxiPage = () => {
             {routes.map((r, i) => (
               <div
                 key={`${r.from}-${r.to}`}
-                className={`grid grid-cols-5 items-center px-5 py-4 text-sm border-t border-border/40 ${i % 2 === 0 ? "" : "bg-muted/30"}`}
+                className={`grid grid-cols-5 items-center px-5 py-4 text-sm border-t border-border/40 min-w-[520px] ${i % 2 === 0 ? "" : "bg-muted/30"}`}
               >
                 <div className="col-span-2 flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
@@ -602,6 +609,7 @@ const TaxiPage = () => {
                 </div>
               </div>
             ))}
+            </div>
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-5">
@@ -628,7 +636,7 @@ const TaxiPage = () => {
               Kashmir's Trusted Cab Service
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {trustPoints.map((t) => (
               <div
                 key={t.title}
@@ -663,13 +671,13 @@ const TaxiPage = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto items-start">
             {/* Form */}
             <form
               onSubmit={handleBook}
-              className="bg-card border border-border/50 rounded-2xl p-7 shadow-md space-y-4"
+              className="bg-card border border-border/50 rounded-2xl p-5 md:p-7 shadow-md space-y-4"
             >
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   placeholder="Your Name"
                   value={form.name}
@@ -686,7 +694,7 @@ const TaxiPage = () => {
                   className="bg-background"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   placeholder="Pickup Location"
                   value={form.pickup}
@@ -702,7 +710,7 @@ const TaxiPage = () => {
                   className="bg-background"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   type="date"
                   value={form.date}

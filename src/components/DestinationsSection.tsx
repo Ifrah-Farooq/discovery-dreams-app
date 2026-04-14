@@ -111,7 +111,7 @@ const DestinationsSection = () => {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Filter tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex overflow-x-auto pb-2 md:flex-wrap md:justify-center gap-3 mb-12 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
           {categories.map((cat) => {
             const count =
               cat === "All"
@@ -121,7 +121,7 @@ const DestinationsSection = () => {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
+                className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
                   active === cat
                     ? "bg-primary text-primary-foreground border-primary shadow-md"
                     : "bg-card text-foreground/70 border-border hover:border-primary hover:text-primary"
@@ -135,7 +135,7 @@ const DestinationsSection = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {filtered.map((dest) => (
             <div
               key={dest.name}
