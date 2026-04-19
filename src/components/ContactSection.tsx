@@ -49,9 +49,15 @@ const ContactSection = () => {
                 <p className="font-semibold text-foreground">Phone</p>
                 <a
                   href="tel:9682553190"
-                  className="text-primary text-sm hover:underline"
+                  className="text-primary text-sm hover:underline block"
                 >
                   +91 9682553190
+                </a>
+                <a
+                  href="tel:9906472544"
+                  className="text-primary text-sm hover:underline block"
+                >
+                  +91 9906472544
                 </a>
               </div>
             </div>

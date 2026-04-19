@@ -9,10 +9,7 @@ import {
   Package,
   Phone,
   Shield,
-  Clock,
   Award,
-  Star,
-  Users,
   ChevronRight,
   HeartHandshake,
   Compass,
@@ -27,13 +24,15 @@ import { Button } from "@/components/ui/button";
 // Service card images — each unique, no repeats
 import gulmargImg from "@/assets/gulmarg.jpg"; // Tour Packages
 import ladakhImg from "@/assets/ladakh.jpg"; // Adventure Ladakh package
-import taxiImg from "@/assets/Toyato-crista 6seater.jpeg"; // Taxi Service
+import taxiImg from "@/assets/taxi-service.jpg"; // Taxi Service
 import pahalgamImg from "@/assets/pahalgam.jpg"; // Destinations
 import houseboatImg from "@/assets/houseboat.jpg"; // Houseboat Stays
 import rentalCarImg from "@/assets/commercial Toyato fortuner.jpeg"; // Rental Bikes & Cars
 import sonamargMdwImg from "@/assets/sonamarg-meadow.jpg"; // Trekking & Adventure
 import pangongImg from "@/assets/pangong-lake.jpg"; // Cinematography
 import shalimarbImg from "@/assets/shalimar-bagh.jpg"; // Events & Celebrations
+import umrahImg from "@/assets/umrah.jpg"; // Umrah Service
+import carImg from "@/assets/Toyato-crista 6seater.jpeg";
 
 // Popular destination circle images
 import gulmargResortImg from "@/assets/gulmarg-resort.jpg";
@@ -119,6 +118,22 @@ const services = [
     image: shalimarbImg,
     href: "/contact",
     cta: "Plan Event",
+  },
+  {
+    icon: Compass,
+    title: "Umrah Service",
+    desc: "Complete Umrah packages with visa assistance, flights, accommodation & guided tours to Makkah and Madinah.",
+    image: umrahImg,
+    href: "/contact",
+    cta: "Enquire Now",
+  },
+  {
+    icon: Car,
+    title: "XUV Contract Hire",
+    desc: "Long-term contract vehicles for government departments & corporates — Crysta, Scorpio & Bolero available.",
+    image: carImg,
+    href: "/contact",
+    cta: "Get a Quote",
   },
 ];
 
@@ -294,7 +309,7 @@ const Index = () => (
             <a
               key={s.title}
               href={s.href}
-              className="group relative rounded-2xl overflow-hidden h-64 block shadow-md hover:shadow-xl transition-all duration-500"
+              className="group relative rounded-2xl overflow-hidden min-h-64 block shadow-md hover:shadow-xl transition-all duration-500"
             >
               <img
                 src={s.image}
@@ -310,7 +325,7 @@ const Index = () => (
                 <h3 className="font-serif font-bold text-white text-lg mb-1">
                   {s.title}
                 </h3>
-                <p className="text-white/65 text-xs leading-relaxed mb-3 line-clamp-2">
+                <p className="text-white/65 text-xs leading-relaxed mb-3">
                   {s.desc}
                 </p>
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-secondary group-hover:gap-2.5 transition-all duration-300">

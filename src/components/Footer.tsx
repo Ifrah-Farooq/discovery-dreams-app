@@ -115,6 +115,13 @@ const Footer = () => (
               <Phone className="w-4 h-4 shrink-0" />
               +91 9682553190
             </a>
+            <a
+              href="tel:9906472544"
+              className="flex items-center gap-2.5 text-primary-foreground/50 hover:text-secondary transition-colors"
+            >
+              <Phone className="w-4 h-4 shrink-0" />
+              +91 9906472544
+            </a>
 
             <a
               href="mailto:rd2598712@gmail.com"
